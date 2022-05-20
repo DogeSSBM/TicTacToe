@@ -23,7 +23,7 @@ void boardPrint(Board board)
     {
         for(uint x = 0; x < 3; ++x)
         {
-            board[x][y] = '-';
+            // board[x][y];
             printf("%c", MarkerChar[board[x][y]]);
         }
         printf("\n");
