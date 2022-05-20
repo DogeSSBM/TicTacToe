@@ -23,8 +23,8 @@ void boardPrint(Board board)
     {
         for(uint x = 0; x < 3; ++x)
         {
-            board[x][y];
-            printf("%c", board[x][y]);
+            board[x][y] = '-';
+            printf("%c", MarkerChar[board[x][y]]);
         }
         printf("\n");
     }
@@ -34,8 +34,13 @@ void boardPrint(Board board)
 
 int main(int argc, char const *argv[])
 {
-    printf("Hello world!\n");
     Board board = {0};
+    board[1][0] = {M_X};
+    board[1][1] = {M_O};
+    board[0][2] = {M_O};
+    board[2][2] = {M_X};
+    boardPrint(board);
+    printf("Hello world!\n");
 
     return 0;
 }
