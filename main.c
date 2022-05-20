@@ -26,11 +26,26 @@ void boardPrint(Board board)
             // board[x][y];
             printf("%c", MarkerChar[board[x][y]]);
         }
+        printf("-");
         printf("\n");
     }
 }
 
+uint numFree(Board board)
+{
+    uint total = 0;
+    for(uint y = 0; y < 3; y++){
+        for(uint x = 0; x < 3; x++){
+            total += board[x][y] != M_E;
+        }
+    }
+    return total;
+}
 
+void placeRandom(Board board)
+{
+
+}
 
 int main(int argc, char const *argv[])
 {
