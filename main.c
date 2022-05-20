@@ -2,8 +2,8 @@
 
 typedef unsigned int uint;
 
-typedef enum{M_X, M_O, M_E, M_N}Marker; //Markers
-char MarkerChar[M_N] = {'X', 'O', ' '};
+typedef enum{M_E, M_X, M_O, M_N}Marker; //Markers
+char MarkerChar[M_N] = {' ', 'X', 'O'};
 typedef Marker Board[3][3];
 
 /*
@@ -16,44 +16,71 @@ typedef Marker Board[3][3];
 
 */
 
+char boardAt(Board board, const uint x, const uint y)
+{
+    return MarkerChar[board[x][y]];
+}
+
+void printAt(Board board, uint x, uint y){
+    printf(" %c %c", boardAt(board, x, y), x < 2 ? '|' : '\n');
+}
+
 void boardPrint(Board board)
 {
-
     for(uint y = 0; y < 3; ++y)
     {
         for(uint x = 0; x < 3; ++x)
         {
-            // board[x][y];
-            printf("%c", MarkerChar[board[x][y]]);
+            printAt(board, x, y);
         }
-        printf("-");
-        printf("\n");
+        if(y < 2)
+            printf("---+---+---\n");
     }
+    printf("\n");
 }
 
-uint numFree(Board board)
+uint numFreeBefore(Board board, const uint n)
 {
     uint total = 0;
+    uint i = 0;
     for(uint y = 0; y < 3; y++){
         for(uint x = 0; x < 3; x++){
-            total += board[x][y] != M_E;
+            if(i >= n)
+                return total;
+            total += board[x][y] == M_E;
+            i++;
         }
     }
     return total;
 }
 
-void placeRandom(Board board)
+void markRandom(Board board, const Marker mark)
 {
+    const uint
+    const uint n = rand()%(numFree(board, n) );
+    board[n%3][n/3 + n%3] = mark;
+}
 
+Marker markInv(const Marker mark)
+{
+    if(mark == M_E)
+        return M_E;
+    return mark == M_X ? M_O : M_X;
 }
 
 int main(int argc, char const *argv[])
 {
+    srand(time(0));
     Board board = {0};
-    board[1][0] = M_X;
-    board[1][1] = M_O;
-    board[0][2] = M_O;
-    board[2][2] = M_X;
+
+    Marker cur = M_X;
+    boardPrint(board);
+    for(uint i = 0; i < 9; i++){
+        markRandom(board, cur);
+        boardPrint(board);
+        cur = markInv(cur);
+    }
+
     boardPrint(board);
     printf("Hello world!\n");
 
