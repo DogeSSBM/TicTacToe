@@ -35,10 +35,10 @@ void boardPrint(Board board)
 int main(int argc, char const *argv[])
 {
     Board board = {0};
-    board[1][0] = {M_X};
-    board[1][1] = {M_O};
-    board[0][2] = {M_O};
-    board[2][2] = {M_X};
+    board[1][0] = M_X;
+    board[1][1] = M_O;
+    board[0][2] = M_O;
+    board[2][2] = M_X;
     boardPrint(board);
     printf("Hello world!\n");
 
